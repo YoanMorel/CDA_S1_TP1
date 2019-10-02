@@ -74,15 +74,15 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;dbname=tp1_db',
-	'hostname' => '',
+	'dsn'	=> '',
+	'hostname' => 'localhost',
 	'username' => 'yoan',
 	'password' => 'A8x305j/',
-	'database' => '',
-	'dbdriver' => 'pdo',
+	'database' => 'tp1_db',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'pconnect' => TRUE,
+	'db_debug' => TRUE,
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',

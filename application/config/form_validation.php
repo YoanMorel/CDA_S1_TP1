@@ -4,17 +4,17 @@ defined('BASEPATH') or die('No direct script access allowed');
 $config = [
     'home/contacts' => [
         [
-            'field' => 'last_name',
+            'field' => 'lastName',
             'label' => 'Nom',
             'rules' => 'required'
         ],
         [
-            'field' => 'first_name',
+            'field' => 'firstName',
             'label' => 'Prénom',
             'rules' => 'required'
         ],
         [
-            'field' => 'birth_date',
+            'field' => 'birthDate',
             'label' => 'Date de naissance',
             'rules' => 'required'
         ],

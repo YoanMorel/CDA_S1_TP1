@@ -1,9 +1,44 @@
 <div class="jumbotron">
   <div class="container">
     <h1><?= $title ?></h1>
-    <p>Page d'accueil TP1</p>
+    <p>Liste des utilisateurs</p>
   </div>
 </div>
 <div class="container-fluid">
-
+  <div class="row no-gutters">
+  <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Date de naissance</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Ville</th>
+      <th scope="col">Code Postal</th>
+      <th scope="col">Téléphone</th>
+      <th scope="col">Service</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+      foreach($users as $user):
+    ?>
+    <tr>
+      <th scope="row"><?= $user->USE_ID; ?></th>
+      <td><?= $user->USE_LAST_NAME; ?></td>
+      <td><?= $user->USE_FIRST_NAME; ?></td>
+      <td><?= $user->bDay; ?></td>
+      <td><?= $user->USE_ADRESS; ?></td>
+      <td><?= $user->USE_CITY; ?></td>
+      <td><?= $user->USE_ZIP_CODE; ?></td>
+      <td><?= $user->USE_PHONE; ?></td>
+      <td><?= $user->DEP_DEPARTMENT; ?></td>
+    </tr>
+    <?php
+      endforeach;
+    ?>
+  </tbody>
+</table>
+  </div>
 </div>

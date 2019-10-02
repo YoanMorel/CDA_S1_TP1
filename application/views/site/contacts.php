@@ -6,9 +6,9 @@
         <?= form_open('contacts'); ?>
         <div class="form-row mx-auto">
             <div class="col-md-6 mb-3">
-                <?php $lastNameError = empty(form_error('last_name')) ? '' : ' is-invalid'; ?>
-                <?= form_label('Nom&nbsp;:', 'last_name'); ?>
-                <?= form_input(['name' => 'last_name', 'id' => 'last_name', 'placeholder' => 'Nom', 'class' => 'form-control'.$lastNameError]); ?>
+                <?php $lastNameError = empty(form_error('lastName')) ? '' : ' is-invalid'; ?>
+                <?= form_label('Nom&nbsp;:', 'lastName'); ?>
+                <?= form_input(['name' => 'lastName', 'id' => 'lastName', 'placeholder' => 'Nom', 'class' => 'form-control'.$lastNameError]); ?>
                 <div class="valid-feedback">
                     Parfait !
                 </div>
@@ -17,9 +17,9 @@
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <?php $firstNameError = empty(form_error('first_name')) ? '' : ' is-invalid'; ?>   
-                <?= form_label('Prénom&nbsp;:', 'first_name'); ?>
-                <?= form_input(['name' => 'first_name', 'id' => 'first_name', 'placeholder' => 'Prénom', 'class' => 'form-control'.$firstNameError]); ?>
+                <?php $firstNameError = empty(form_error('firstName')) ? '' : ' is-invalid'; ?>   
+                <?= form_label('Prénom&nbsp;:', 'firstName'); ?>
+                <?= form_input(['name' => 'firstName', 'id' => 'firstName', 'placeholder' => 'Prénom', 'class' => 'form-control'.$firstNameError]); ?>
                 <div class="valid-feedback">
                     Parfait !
                 </div>
@@ -28,9 +28,9 @@
                 </div>
             </div>
             <div class="col-md-6 mb-3">
-                <?php $birthDateError = empty(form_error('birth_date')) ? '' : ' is-invalid'; ?>
-                <?= form_label('Date de naissance&nbsp;:', 'birth_date'); ?>
-                <?= form_input(['name' => 'birth_date', 'id' => 'birth_date', 'type' => 'date', 'class' => 'form-control'.$birthDateError]); ?>
+                <?php $birthDateError = empty(form_error('birthDate')) ? '' : ' is-invalid'; ?>
+                <?= form_label('Date de naissance&nbsp;:', 'birthDate'); ?>
+                <?= form_input(['name' => 'birthDate', 'id' => 'birthDate', 'type' => 'date', 'class' => 'form-control'.$birthDateError]); ?>
                 <div class="valid-feedback">
                     Parfait !
                 </div>
@@ -40,6 +40,17 @@
             </div>
         </div>
         <div class="form-row mx-auto">
+            <div class="col-md-12 mb-3">
+                <?php $adressError = empty(form_error('adress')) ? '' : ' is-invalid'; ?>
+                <?= form_label('Adresse', 'adress'); ?>
+                <?= form_input(['name' => 'adress', 'id' => 'adress', 'placeholder' => 'Adresse', 'class' => 'form-control'.$adressError]); ?>
+                <div class="valid-feedback">
+                    Parfait !
+                </div>
+                <div class="invalid-feedback">
+                    S'il vous plait, renseignez une adresse.
+                </div>
+            </div>
             <div class="col-md-6 mb-3">
                 <?php $cityError = empty(form_error('city')) ? '' : ' is-invalid'; ?>
                 <?= form_label('Ville', 'city'); ?>
@@ -80,7 +91,7 @@
             <div class="col-md-6 mb-3">
                 <?php $departmentError = empty(form_error('department')) ? '' : ' is-invalid'; ?>
                 <?= form_label('Service', 'department'); ?>
-                <?= form_input(['name' => 'department', 'id' => 'department', 'placeholder' => 'Service', 'class' => 'form-control'.$departmentError]); ?>
+                <?= form_dropdown('department', $options, '0',['id' => 'department', 'class' => 'custom-select form-control'.$departmentError]); ?>
                 <div class="valid-feedback">
                     Parfait !
                 </div>

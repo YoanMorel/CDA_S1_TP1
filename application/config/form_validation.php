@@ -19,6 +19,11 @@ $config = [
             'rules' => 'required'
         ],
         [
+            'field' => 'adress',
+            'label' => 'Adresse',
+            'rules' => 'required'
+        ],
+        [
             'field' => 'city',
             'label' => 'Ville',
             'rules' => 'required'

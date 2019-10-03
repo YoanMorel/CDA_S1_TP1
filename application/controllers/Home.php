@@ -5,6 +5,8 @@ class Home extends CI_Controller {
 
     public function index() {
         $data['title'] = 'TP1';
+        $data['users'] = NULL;
+        $this->load->helper('url');
         $this->load->model('users');
         
         if($this->users->hasUsers):
@@ -14,6 +16,21 @@ class Home extends CI_Controller {
         $this->load->view('common/header', $data);
         $this->load->view('site/index', $data);
         $this->load->view('common/footer', $data);
+    }
+
+    public function delete($id) {
+        $this->load->model('users');
+        $this->users->loadUser($id);
+
+        if(!$this->users->isFound):
+            redirect('index');
+        endif;
+
+        if($this->users->deleteUser()):
+            redirect('index');
+        else:
+            echo 'coucou, c\'est un fail !';
+        endif;
     }
 
     public function contacts() {

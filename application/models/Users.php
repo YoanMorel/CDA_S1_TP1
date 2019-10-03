@@ -3,6 +3,7 @@ defined('BASEPATH') or die('No direct script access allowed');
 
 Class Users extends CI_Model {
 
+    protected $_id;
     protected $_lastName;
     protected $_firstName;
     protected $_birthDate;
@@ -38,6 +39,8 @@ Class Users extends CI_Model {
     }
 
     protected function clearData() {
+
+        $this->_id          = NULL;
         $this->_lastName    = NULL;
         $this->_firstName   = NULL;
         $this->_birthDate   = NULL;
@@ -46,6 +49,10 @@ Class Users extends CI_Model {
         $this->_zip         = NULL;
         $this->_phone       = NULL;
         $this->_department  = NULL;
+    }
+
+    protected function getProperty_id() {
+        return $this->_id;
     }
 
     protected function getProperty_lastName() {
@@ -92,6 +99,10 @@ Class Users extends CI_Model {
         return $this->_usersList;
     }
 
+    protected function getProperty_isFound() {
+        return $this->_id !== NULL;
+    }
+
     public function createUser() {
 
         $properties = [
@@ -108,6 +119,16 @@ Class Users extends CI_Model {
         $this->db->insert('t_users', $properties);
     }
 
+    public function loadUser($userId) {
+        $this->clearData();
+        $this->db->from('t_users')->where('USE_ID', $userId);
+        $result = $this->db->get()->first_row();
+
+        if($result !== NULL):
+            $this->_id = $result->USE_ID;
+        endif;
+    }
+
     private function setProperty_usersList() {
 
         $this->db->select('t_users.*, DATE_FORMAT(t_users.USE_BIRTH_DATE, "%d/%m/%Y") AS bDay, t_departments.DEP_DEPARTMENT');
@@ -115,6 +136,16 @@ Class Users extends CI_Model {
         $this->db->join('t_departments', 't_departments.DEP_ID = t_users.DEP_ID', 'left');
 
         $this->_usersList = $this->db->get()->result();
+    }
+
+    public function deleteUser() {
+        $stmt = $this->db->delete('t_users', ['USE_ID' => $this->_id]);
+
+        if($stmt !== FALSE):
+            return TRUE;
+        else:
+            return $stmt;
+        endif;
     }
 
     protected function setProperty_lastName($lastName) {

@@ -129,15 +129,6 @@ Class Users extends CI_Model {
         endif;
     }
 
-    private function setProperty_usersList() {
-
-        $this->db->select('t_users.*, DATE_FORMAT(t_users.USE_BIRTH_DATE, "%d/%m/%Y") AS bDay, t_departments.DEP_DEPARTMENT');
-        $this->db->from('t_users');
-        $this->db->join('t_departments', 't_departments.DEP_ID = t_users.DEP_ID', 'left');
-
-        $this->_usersList = $this->db->get()->result();
-    }
-
     public function deleteUser() {
         $stmt = $this->db->delete('t_users', ['USE_ID' => $this->_id]);
 
@@ -146,6 +137,24 @@ Class Users extends CI_Model {
         else:
             return $stmt;
         endif;
+    }
+
+    public function loadUsersIn($department) {
+        $this->db->select('t_users.*, DATE_FORMAT(t_users.USE_BIRTH_DATE, "%d/%m/%Y") AS bDay, t_departments.DEP_DEPARTMENT');
+        $this->db->from('t_users');
+        $this->db->join('t_departments', 't_users.DEP_ID = t_departments.DEP_ID', 'left');
+        $this->db->where('DEP_DEPARTMENT', $department);
+
+        $this->_usersList = $this->db->get()->result();
+    }
+
+    private function setProperty_usersList() {
+
+        $this->db->select('t_users.*, DATE_FORMAT(t_users.USE_BIRTH_DATE, "%d/%m/%Y") AS bDay, t_departments.DEP_DEPARTMENT');
+        $this->db->from('t_users');
+        $this->db->join('t_departments', 't_departments.DEP_ID = t_users.DEP_ID', 'left');
+
+        $this->_usersList = $this->db->get()->result();
     }
 
     protected function setProperty_lastName($lastName) {

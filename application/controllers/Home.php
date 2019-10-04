@@ -5,12 +5,28 @@ class Home extends CI_Controller {
 
     public function index() {
         $data['title'] = 'TP1';
-        $data['users'] = NULL;
-        $this->load->helper('url');
+        $data['users'] = '';
+        $data['departments'] = '';
+        $this->load->helper(['url', 'form']);
+        $this->load->library('form_validation');
         $this->load->model('users');
+        $this->load->model('departments');
+        $data['nbUsers'] = $this->users->numUsers;
         
         if($this->users->hasUsers):
             $data['users'] = $this->users->users;
+            $this->departments->loadDepartments();
+            $data['departments'] = ['all' => 'Tous les services'];
+            foreach($this->departments->items as $row):
+                $data['departments'][$row->DEP_DEPARTMENT] = $row->DEP_DEPARTMENT;
+            endforeach;
+            if($this->form_validation->run() && $this->input->post('departmentsFilter') != 'all'):
+                $this->departments->loadDepartment($this->input->post('departmentsFilter'));
+                if($this->departments->isFound):
+                    $this->users->loadUsersIn($this->input->post('departmentsFilter'));
+                    $data['users'] = $this->users->users;
+                endif;
+            endif;
         endif;
 
         $this->load->view('common/header', $data);
@@ -50,6 +66,7 @@ class Home extends CI_Controller {
             $this->users->zip           = $this->input->post('zip');
             $this->users->phone         = $this->input->post('phone');
             $this->users->department    = $this->input->post('department');
+
             $this->users->createUser();
             $this->load->view('site/contacts_result');
         else:

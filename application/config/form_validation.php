@@ -43,6 +43,13 @@ $config = [
             'label' => 'Service',
             'rules' => 'required'
         ]
+    ],
+    'home/index' => [
+        [
+            'field' => 'departmentsFilter',
+            'label' => 'Filtre',
+            'rules' => 'required'
+        ]
     ]
 ];
 

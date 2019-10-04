@@ -32,9 +32,15 @@
           <?= anchor('contacts', 'Contacts', ['class' => 'nav-link']); ?>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
-      </form>
+      <?php
+        if($this->uri->segment(1) == 'index') :
+      ?>
+      <?= form_open('index', ['class' => 'form-inline my-2 my-lg-0']); ?>
+      <?= form_dropdown('departmentsFilter', $departments, 'all', ['id' => 'department', 'class' => 'custom-select form-control']); ?>
+      <?= form_submit('send', 'Filtrer', ['class' => 'btn btn-outline-success my-2 my-sm-0']); ?>
+      <?= form_close(); ?>
+      <?php
+        endif;
+      ?>
     </div>
   </nav>

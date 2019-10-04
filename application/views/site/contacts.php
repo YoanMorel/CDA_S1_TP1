@@ -91,7 +91,7 @@
             <div class="col-md-6 mb-3">
                 <?php $departmentError = empty(form_error('department')) ? '' : ' is-invalid'; ?>
                 <?= form_label('Service', 'department'); ?>
-                <?= form_dropdown('department', $options, '0',['id' => 'department', 'class' => 'custom-select form-control'.$departmentError]); ?>
+                <?= form_dropdown('department', $options, '0', ['id' => 'department', 'class' => 'custom-select form-control'.$departmentError]); ?>
                 <div class="valid-feedback">
                     Parfait !
                 </div>

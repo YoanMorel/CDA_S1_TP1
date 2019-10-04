@@ -4,6 +4,7 @@ defined('BASEPATH') or die('No direct script access allowed');
 class Departments extends CI_Model {
 
     protected $_departments;
+    protected $_department;
 
     public function __construct() {
         parent::__construct();
@@ -30,7 +31,15 @@ class Departments extends CI_Model {
         return count($this->_departments);
     }
 
+    protected function getProperty_isFound() {
+        return $this->_department !== NULL;
+    }
+
     public function loadDepartments() {
         $this->_departments = $this->db->get('t_departments')->result();
+    }
+
+    public function loadDepartment($department) {
+        $this->_department = $this->db->get_where('t_departments', ['DEP_DEPARTMENT' => $department])->first_row();
     }
 }

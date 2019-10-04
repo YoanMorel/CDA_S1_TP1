@@ -23,24 +23,34 @@
       </thead>
       <tbody>
         <?php
-        foreach ($users as $user) :
-          ?>
-          <tr>
-            <th scope="row"><?= $user->USE_ID; ?></th>
-            <td><?= $user->USE_LAST_NAME; ?></td>
-            <td><?= $user->USE_FIRST_NAME; ?></td>
-            <td><?= $user->bDay; ?></td>
-            <td><?= $user->USE_ADRESS; ?></td>
-            <td><?= $user->USE_CITY; ?></td>
-            <td><?= $user->USE_ZIP_CODE; ?></td>
-            <td><?= $user->USE_PHONE; ?></td>
-            <td><?= $user->DEP_DEPARTMENT; ?></td>
-            <td class="text-center"><?= anchor('delete/'.$user->USE_ID, '<i class="fas fa-fw fa-trash"></i>', ['class' => 'btn btn-danger']); ?></td>
-          </tr>
+        if(!empty($users)):
+          foreach($users as $user):
+        ?>
+        <tr>
+          <th scope="row"><?= $user->USE_ID; ?></th>
+          <td><?= $user->USE_LAST_NAME; ?></td>
+          <td><?= $user->USE_FIRST_NAME; ?></td>
+          <td><?= $user->bDay; ?></td>
+          <td><?= $user->USE_ADRESS; ?></td>
+          <td><?= $user->USE_CITY; ?></td>
+          <td><?= $user->USE_ZIP_CODE; ?></td>
+          <td><?= $user->USE_PHONE; ?></td>
+          <td><?= $user->DEP_DEPARTMENT; ?></td>
+          <td class="text-center"><?= anchor('delete/' . $user->USE_ID, '<i class="fas fa-fw fa-trash"></i>', ['class' => 'btn btn-danger']); ?></td>
+        </tr>
         <?php
-        endforeach;
+            endforeach;
+          else :
+        ?>
+        <tr>
+          <th scope="row">N/A</th>
+          <td colspan="9" class="text-center">Pas d'utilisateur dans le service/la base de données</td>
+        </tr>
+        <?php
+          endif;
         ?>
       </tbody>
     </table>
+    <div class="col-md-6 ml-auto text-right">Nombre total d'utilisateurs : <?= $nbUsers; ?></div>
   </div>
 </div>
